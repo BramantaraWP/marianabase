@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Builder Editor</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+</head>
+<body>
+    <div class="builder-container">
+        <!-- Top Bar -->
+        <div class="builder-topbar">
+            <div class="builder-info">
+                <h2 id="builder-title">Editor Website</h2>
+                <p id="builder-url">localhost/preview</p>
+            </div>
+            <div class="builder-actions">
+                <button class="btn" onclick="previewWebsite()">
+                    <i class="fas fa-eye"></i> Preview
+                </button>
+                <button class="btn btn-primary" onclick="saveWebsite()">
+                    <i class="fas fa-save"></i> Simpan
+                </button>
+                <button class="btn btn-success" onclick="deployFromEditor()">
+                    <i class="fas fa-rocket"></i> Deploy
+                </button>
+                <button class="btn" onclick="exitEditor()">
+                    <i class="fas fa-sign-out-alt"></i> Keluar
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Editor -->
+        <div class="editor-main">
+            <!-- Left Sidebar - Components -->
+            <div class="editor-sidebar left">
+                <h3><i class="fas fa-puzzle-piece"></i> Komponen</h3>
+                <div class="components-list">
+                    <div class="component" draggable="true" data-type="header">
+                        <i class="fas fa-heading"></i> Header
+                    </div>
+                    <div class="component" draggable="true" data-type="hero">
+                        <i class="fas fa-star"></i> Hero Section
+                    </div>
+                    <div class="component" draggable="true" data-type="product">
+                        <i class="fas fa-box"></i> Produk
+                    </div>
+                    <div class="component" draggable="true" data-type="contact">
+                        <i class="fas fa-envelope"></i> Form Kontak
+                    </div>
+                    <div class="component" draggable="true" data-type="gallery">
+                        <i class="fas fa-images"></i> Galeri
+                    </div>
+                    <div class="component" draggable="true" data-type="footer">
+                        <i class="fas fa-footer"></i> Footer
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center - Visual Editor -->
+            <div class="editor-center">
+                <div class="editor-toolbar">
+                    <button onclick="switchView('visual')"><i class="fas fa-eye"></i> Visual</button>
+                    <button onclick="switchView('html')"><i class="fas fa-code"></i> HTML</button>
+                    <button onclick="switchView('css')"><i class="fas fa-paint-brush"></i> CSS</button>
+                    <button onclick="switchView('js')"><i class="fas fa-code"></i> JS</button>
+                </div>
+                
+                <div id="visual-editor" class="editor-view active">
+                    <!-- Live preview akan ditampilkan di sini -->
+                    <iframe id="live-preview" style="width: 100%; height: 100%; border: none;"></iframe>
+                </div>
+                
+                <div id="html-editor" class="editor-view">
+                    <textarea id="html-code"></textarea>
+                </div>
+                
+                <div id="css-editor" class="editor-view">
+                    <textarea id="css-code"></textarea>
+                </div>
+                
+                <div id="js-editor" class="editor-view">
+                    <textarea id="js-code"></textarea>
+                </div>
+            </div>
+
+            <!-- Right Sidebar - Properties -->
+            <div class="editor-sidebar right">
+                <h3><i class="fas fa-sliders-h"></i> Properties</h3>
+                <div id="properties-panel">
+                    <p>Pilih komponen untuk mengedit properties</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="builder.js"></script>
+</body>
+</html>
