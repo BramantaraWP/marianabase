@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Builder - Gas Industri</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --telegram-blue: #0088cc;
+            --telegram-dark: #006699;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.8rem;
+            color: var(--telegram-blue);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Stats Cards */
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--telegram-blue);
+            box-shadow: 0 15px 35px rgba(0,136,204,0.15);
+        }
+        
+        .stat-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        .icon-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .icon-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .icon-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .icon-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        
+        .stat-info h3 {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        /* Website List */
+        .websites-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .section-header h2 {
+            color: #333;
+            font-size: 1.8rem;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--telegram-blue);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--telegram-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+        }
+        
+        /* Website Grid */
+        .websites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        
+        .website-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 2px solid #e9ecef;
+        }
+        
+        .website-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: var(--telegram-blue);
+        }
+        
+        .website-preview {
+            height: 180px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .website-info {
+            padding: 20px;
+        }
+        
+        .website-info h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .website-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .website-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            flex: 1;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+            animation: slideUp 0.3s;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--telegram-blue);
+            outline: none;
+        }
+        
+        /* Template Gallery */
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .template-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .template-preview {
+            height: 200px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 2.5rem;
+        }
+        
+        .template-info {
+            padding: 20px;
+        }
+        
+        /* Alert */
+        .alert {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            animation: slideIn 0.3s;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        /* Loading */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--telegram-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .websites-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <i class="fab fa-telegram"></i>
+                <div>
+                    <h1>Website Builder</h1>
+                    <p>Gas Industri - Free Hosting dengan Telegram Storage</p>
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="showConfigModal()">
+                <i class="fas fa-cog"></i> Konfigurasi Bot
+            </button>
+        </div>
+
+        <!-- Alert Message -->
+        <div id="alert" class="alert"></div>
+
+        <!-- Stats Cards -->
+        <div class="stats-cards">
+            <div class="stat-card" onclick="loadWebsites()">
+                <div class="stat-icon icon-1">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="total-websites">0</h3>
+                    <p>Total Website</p>
+                </div>
+            </div>
+            
+            <div class="stat-card" onclick="showTemplateModal()">
+                <div class="stat-icon icon-2">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="total-templates">5</h3>
+                    <p>Template Tersedia</p>
+                </div>
+            </div>
+            
+            <div class="stat-card" onclick="showDeployModal()">
+                <div class="stat-icon icon-3">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="active-deploys">0</h3>
+                    <p>Website Aktif</p>
+                </div>
+            </div>
+            
+            <div class="stat-card" onclick="syncWithTelegram()">
+                <div class="stat-icon icon-4">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="last-sync">-</h3>
+                    <p>Terakhir Sync</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Websites Section -->
+        <div class="websites-section">
+            <div class="section-header">
+                <h2><i class="fas fa-list"></i> Daftar Website Anda</h2>
+                <button class="btn btn-success" onclick="showCreateModal()">
+                    <i class="fas fa-plus"></i> Buat Website Baru
+                </button>
+            </div>
+            
+            <div class="websites-grid" id="websites-list">
+                <!-- Website cards will be loaded here -->
+                <div class="empty-state" style="text-align: center; padding: 50px; color: #666;">
+                    <i class="fas fa-folder-open" style="font-size: 4rem; margin-bottom: 20px;"></i>
+                    <h3>Belum ada website</h3>
+                    <p>Klik "Buat Website Baru" untuk memulai</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="websites-section">
+            <h2 style="margin-bottom: 20px;"><i class="fas fa-bolt"></i> Aksi Cepat</h2>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="backupToTelegram()">
+                    <i class="fas fa-cloud-upload-alt"></i> Backup ke Telegram
+                </button>
+                <button class="btn" onclick="exportAllWebsites()">
+                    <i class="fas fa-download"></i> Export Semua Website
+                </button>
+                <button class="btn" onclick="importFromFile()">
+                    <i class="fas fa-upload"></i> Import dari File
+                </button>
+                <button class="btn btn-success" onclick="showDeployGuide()">
+                    <i class="fas fa-question-circle"></i> Panduan Deploy
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Create Website -->
+    <div id="createModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('createModal')">&times;</span>
+            <h2 style="margin-bottom: 20px;"><i class="fas fa-plus-circle"></i> Buat Website Baru</h2>
+            
+            <div class="form-group">
+                <label for="websiteName">Nama Website:</label>
+                <input type="text" id="websiteName" class="form-control" placeholder="Contoh: Gas Industri Makmur">
+            </div>
+            
+            <div class="form-group">
+                <label for="websiteType">Jenis Website:</label>
+                <select id="websiteType" class="form-control" onchange="showTemplateOptions()">
+                    <option value="">Pilih Jenis</option>
+                    <option value="gas-industri">Gas Industri</option>
+                    <option value="toko-online">Toko Online</option>
+                    <option value="portfolio">Portfolio</option>
+                    <option value="blog">Blog</option>
+                    <option value="company-profile">Company Profile</option>
+                </select>
+            </div>
+            
+            <div id="templateOptions" style="display: none;">
+                <div class="form-group">
+                    <label>Pilih Template:</label>
+                    <div class="templates-grid">
+                        <div class="template-card" onclick="selectTemplate('gas-industri-1')">
+                            <div class="template-preview">
+                                <i class="fas fa-gas-pump"></i>
+                            </div>
+                            <div class="template-info">
+                                <h4>Gas Industri Pro</h4>
+                                <p>Template lengkap untuk bisnis gas</p>
+                            </div>
+                        </div>
+                        
+                        <div class="template-card" onclick="selectTemplate('gas-industri-2')">
+                            <div class="template-preview">
+                                <i class="fas fa-industry"></i>
+                            </div>
+                            <div class="template-info">
+                                <h4>Gas Modern</h4>
+                                <p>Desain modern untuk perusahaan gas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="websiteUrl">Subdomain:</label>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="websiteUrl" class="form-control" placeholder="nama-website">
+                    <span style="padding: 12px; background: #f0f0f0; border-radius: 10px;">.freehost.com</span>
+                </div>
+            </div>
+            
+            <div style="text-align: right; margin-top: 30px;">
+                <button class="btn" onclick="closeModal('createModal')">Batal</button>
+                <button class="btn btn-primary" onclick="createWebsite()">
+                    <i class="fas fa-magic"></i> Buat Sekarang
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Config Bot -->
+    <div id="configModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('configModal')">&times;</span>
+            <h2 style="margin-bottom: 20px;"><i class="fas fa-robot"></i> Konfigurasi Telegram Bot</h2>
+            
+            <div class="form-group">
+                <label for="botToken">Bot Token:</label>
+                <input type="text" id="botToken" class="form-control" 
+                       placeholder="1234567890:AAHx7g5tYJwQw5pJwK5pJwK5pJwK5pJwK5pJw">
+                <small style="color: #666;">Dapatkan dari @BotFather di Telegram</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="chatId">Chat ID:</label>
+                <input type="text" id="chatId" class="form-control" placeholder="123456789">
+                <small style="color: #666;">Dapatkan dari @userinfobot di Telegram</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="storageMode">Mode Penyimpanan:</label>
+                <select id="storageMode" class="form-control">
+                    <option value="local">LocalStorage Saja</option>
+                    <option value="telegram">Telegram + LocalStorage</option>
+                    <option value="sync">Auto Sync ke Telegram</option>
+                </select>
+            </div>
+            
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 20px 0;">
+                <h4><i class="fas fa-info-circle"></i> Cara Setup:</h4>
+                <ol style="margin-left: 20px; margin-top: 10px;">
+                    <li>Buka Telegram, cari @BotFather</li>
+                    <li>Ketik /newbot untuk membuat bot baru</li>
+                    <li>Simpan token yang diberikan</li>
+                    <li>Buka @userinfobot untuk dapat Chat ID</li>
+                    <li>Masukkan data di atas</li>
+                </ol>
+            </div>
+            
+            <div style="text-align: right;">
+                <button class="btn" onclick="closeModal('configModal')">Batal</button>
+                <button class="btn btn-success" onclick="saveBotConfig()">
+                    <i class="fas fa-save"></i> Simpan Konfigurasi
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Deploy -->
+    <div id="deployModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('deployModal')">&times;</span>
+            <h2 style="margin-bottom: 20px;"><i class="fas fa-rocket"></i> Deploy Website</h2>
+            
+            <div class="form-group">
+                <label>Pilih Website untuk Deploy:</label>
+                <select id="deployWebsite" class="form-control">
+                    <!-- Options will be filled by JS -->
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Pilih Hosting:</label>
+                <select id="hostingProvider" class="form-control">
+                    <option value="000webhost">000webhost (Rekomendasi)</option>
+                    <option value="infinityfree">InfinityFree</option>
+                    <option value="netlify">Netlify</option>
+                    <option value="github">GitHub Pages</option>
+                </select>
+            </div>
+            
+            <div id="deployInstructions" style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h4><i class="fas fa-list-ol"></i> Instruksi Deploy:</h4>
+                <ol style="margin-left: 20px; margin-top: 10px;">
+                    <li>Download file website (ZIP)</li>
+                    <li>Daftar di hosting pilihan</li>
+                    <li>Upload file ZIP ke hosting</li>
+                    <li>Ekstrak file di server</li>
+                    <li>Akses website melalui URL yang diberikan</li>
+                </ol>
+            </div>
+            
+            <div style="text-align: right;">
+                <button class="btn" onclick="closeModal('deployModal')">Batal</button>
+                <button class="btn btn-primary" onclick="prepareDeploy()">
+                    <i class="fas fa-download"></i> Download ZIP
+                </button>
+                <button class="btn btn-success" onclick="deployAuto()">
+                    <i class="fas fa-bolt"></i> Deploy Otomatis
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
